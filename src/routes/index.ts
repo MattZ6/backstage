@@ -1,5 +1,12 @@
 import { Router } from 'express';
 
-const routes = Router();
+import usersRouter from './users.routes';
+import sessionsRouter from './session.routes';
 
-export default routes;
+const router = Router();
+
+router.use('/v1/sessions', sessionsRouter);
+
+router.use('/v1/users', usersRouter);
+
+export default router;

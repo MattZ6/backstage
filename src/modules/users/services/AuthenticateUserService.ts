@@ -2,11 +2,11 @@ import { getCustomRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
-import authConfig from '../config/auth';
+import authConfig from '@config/auth';
 
-import AppError, { EnumStatusCode } from '../errors/AppError';
+import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
-import UsersRepository from '../repositories/UsersRepository';
+import UsersRepository from '@modules/users/repositories/UsersRepository';
 
 interface IRequest {
   email: string;

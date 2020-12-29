@@ -13,6 +13,7 @@
     // "outFile": "./",
     "outDir": "./dist",
     "rootDir": "./src",
+    "emitDecoratorMetadata": true,
     // "composite": true,
     // "tsBuildInfoFile": "./",
     // "removeComments": true,

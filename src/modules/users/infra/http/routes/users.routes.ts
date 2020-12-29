@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import CreateUsersService from '@modules/users/services/CreateUserService';
 
 const router = Router();
@@ -14,7 +15,9 @@ interface IPostBody {
 router.post('', async (req, res) => {
   const { name, nick_name, email, password } = req.body as IPostBody;
 
-  const createUser = new CreateUsersService();
+  const usersRepository = new UsersRepository();
+
+  const createUser = new CreateUsersService(usersRepository);
 
   const user = await createUser.execute({
     name,

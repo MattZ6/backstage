@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
@@ -5,7 +6,9 @@ import authConfig from '@config/auth';
 
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUsersRepository, {
+  USERS_REPOSITORY_INDENTIFIER,
+} from '@modules/users/repositories/IUsersRepository';
 
 interface IRequest {
   email: string;
@@ -16,8 +19,12 @@ interface IResponse {
   access_token: string;
 }
 
+@injectable()
 class AuthenticateUserService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject(USERS_REPOSITORY_INDENTIFIER)
+    private usersRepository: IUsersRepository
+  ) {}
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email);

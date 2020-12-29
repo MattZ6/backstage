@@ -1,9 +1,12 @@
+import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcryptjs';
 
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUsersRepository, {
+  USERS_REPOSITORY_INDENTIFIER,
+} from '@modules/users/repositories/IUsersRepository';
 
 interface IRequest {
   name: string;
@@ -14,8 +17,12 @@ interface IRequest {
 
 type IResponse = Omit<User, 'password_hash'>;
 
+@injectable()
 class CreateUserService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject(USERS_REPOSITORY_INDENTIFIER)
+    private usersRepository: IUsersRepository
+  ) {}
 
   public async execute({
     name,

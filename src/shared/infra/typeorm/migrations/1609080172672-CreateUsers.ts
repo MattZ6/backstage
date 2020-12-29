@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-import { USERS_TABLE_NAME } from '../../models/User';
+import { USERS_TABLE_NAME } from '@modules/users/infra/typeorm/entities/User';
 
 export default class CreateUsers1609080172672 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

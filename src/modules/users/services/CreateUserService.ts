@@ -1,10 +1,10 @@
 import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
-import AppError, { EnumStatusCode } from '../errors/AppError';
+import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
-import User from '../models/User';
-import UsersRepository from '../repositories/UsersRepository';
+import User from '@modules/users/infra/typeorm/entities/User';
+import UsersRepository from '@modules/users/repositories/UsersRepository';
 
 interface IRequest {
   name: string;

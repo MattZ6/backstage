@@ -4,7 +4,7 @@ import { hash } from 'bcryptjs';
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
-import UsersRepository from '@modules/users/repositories/UsersRepository';
+import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
 interface IRequest {
   name: string;
@@ -46,14 +46,12 @@ class CreateUserService {
 
     const passwordHash = await hash(password, 10);
 
-    const user = usersRepository.create({
+    const user = await usersRepository.create({
       name,
       email,
       nick_name,
       password_hash: passwordHash,
     });
-
-    await usersRepository.save(user);
 
     return {
       id: user.id,

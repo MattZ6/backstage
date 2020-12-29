@@ -6,7 +6,7 @@ import authConfig from '@config/auth';
 
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
-import UsersRepository from '@modules/users/repositories/UsersRepository';
+import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
 interface IRequest {
   email: string;

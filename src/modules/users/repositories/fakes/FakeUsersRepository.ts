@@ -34,6 +34,14 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async update(user: User): Promise<User> {
+    const index = this.users.findIndex(x => x.id === user.id);
+
+    Object.assign(this.users[index], { ...user, updated_at: new Date() });
+
+    return this.users[index];
+  }
+
   public async findById(id: string): Promise<User | undefined> {
     return this.users.find(user => user.id === id);
   }

@@ -1,4 +1,13 @@
-## 📋 Dependencies
+<div align="center">
+  <h1>👨🏻‍🎤 Musicians Hub API</h1>
+</div>
+
+## 💡 You will need
+> TODO
+
+## 📋 How to use?
+
+From a terminal (bash, cmd, ...)
 
 ```bash
 # Install Postgres database with Docker

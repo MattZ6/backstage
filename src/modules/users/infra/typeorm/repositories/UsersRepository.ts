@@ -27,6 +27,10 @@ class UsersRepository implements IUsersRepository {
     return this.repository.save(user);
   }
 
+  public async update(user: User): Promise<User> {
+    return this.repository.save(user);
+  }
+
   public async findById(id: string): Promise<User | undefined> {
     return this.repository.findOne({
       where: { id },

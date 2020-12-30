@@ -1,5 +1,7 @@
 import { container } from 'tsyringe';
 
+import '@modules/users/providers';
+
 import IUsersRepository, {
   USERS_REPOSITORY_INDENTIFIER,
 } from '@modules/users/repositories/IUsersRepository';

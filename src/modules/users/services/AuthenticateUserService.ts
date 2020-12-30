@@ -1,10 +1,13 @@
 import { inject, injectable } from 'tsyringe';
-import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import authConfig from '@config/auth';
 
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+
+import IHashProvider, {
+  HASH_PROVIDER_INDENTIFIER,
+} from '@modules/users/providers/HashProvider/models/IHashProvider';
 
 import IUsersRepository, {
   USERS_REPOSITORY_INDENTIFIER,
@@ -23,7 +26,9 @@ interface IResponse {
 class AuthenticateUserService {
   constructor(
     @inject(USERS_REPOSITORY_INDENTIFIER)
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject(HASH_PROVIDER_INDENTIFIER)
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
@@ -36,7 +41,10 @@ class AuthenticateUserService {
       );
     }
 
-    const passwordMatch = await compare(password, user.password_hash);
+    const passwordMatch = await this.hashProvider.compareHash(
+      password,
+      user.password_hash
+    );
 
     if (!passwordMatch) {
       throw new AppError(

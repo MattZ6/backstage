@@ -1,9 +1,13 @@
 import { inject, injectable } from 'tsyringe';
-import { hash } from 'bcryptjs';
 
 import AppError, { EnumStatusCode } from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+
+import IHashProvider, {
+  HASH_PROVIDER_INDENTIFIER,
+} from '@modules/users/providers/HashProvider/models/IHashProvider';
+
 import IUsersRepository, {
   USERS_REPOSITORY_INDENTIFIER,
 } from '@modules/users/repositories/IUsersRepository';
@@ -21,7 +25,10 @@ type IResponse = Omit<User, 'password_hash'>;
 class CreateUserService {
   constructor(
     @inject(USERS_REPOSITORY_INDENTIFIER)
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject(HASH_PROVIDER_INDENTIFIER)
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({
@@ -52,7 +59,7 @@ class CreateUserService {
       );
     }
 
-    const passwordHash = await hash(password, 10);
+    const passwordHash = await this.hashProvider.generateHash(password);
 
     const user = await this.usersRepository.create({
       name,

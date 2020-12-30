@@ -1,14 +1,14 @@
-import { getRepository, Repository } from 'typeorm';
+import { v4 } from 'uuid';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 
 class UsersRepository implements IUsersRepository {
-  private repository: Repository<User>;
+  private users: User[];
 
   constructor() {
-    this.repository = getRepository(User);
+    this.users = [];
   }
 
   public async create({
@@ -17,32 +17,33 @@ class UsersRepository implements IUsersRepository {
     email,
     password_hash,
   }: ICreateUserDTO): Promise<User> {
-    const user = this.repository.create({
-      name,
-      email,
-      nick_name,
-      password_hash,
-    });
+    const user = new User();
 
-    return this.repository.save(user);
+    Object.assign(user, {
+      id: v4(),
+      name,
+      nick_name,
+      email,
+      password_hash,
+      created_at: new Date(),
+      updated_at: new Date(),
+    } as User);
+
+    this.users.push(user);
+
+    return user;
   }
 
   public async findById(id: string): Promise<User | undefined> {
-    return this.repository.findOne({
-      where: { id },
-    });
+    return this.users.find(user => user.id === id);
   }
 
   public async findByNickName(nickName: string): Promise<User | undefined> {
-    return this.repository.findOne({
-      where: { nick_name: nickName },
-    });
+    return this.users.find(user => user.nick_name === nickName);
   }
 
   public async findByEmail(email: string): Promise<User | undefined> {
-    return this.repository.findOne({
-      where: { email },
-    });
+    return this.users.find(user => user.email === email);
   }
 }
 

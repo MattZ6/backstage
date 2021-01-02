@@ -1,5 +1,10 @@
+.idea/
+.vscode/
 node_modules/
-tmp/*
-!tmp/.gitkeep
+build/
+.env
 coverage
 *.log
+
+tmp/*
+!tmp/.gitkeep

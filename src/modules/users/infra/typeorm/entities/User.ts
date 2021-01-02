@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 export const USERS_TABLE_NAME = 'users';
 
@@ -23,6 +24,7 @@ class User {
   email: string;
 
   @Column()
+  @Exclude()
   password_hash: string;
 
   @CreateDateColumn()

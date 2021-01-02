@@ -15,21 +15,14 @@ class ShowProfileService {
     private usersRepository: IUsersRepository
   ) {}
 
-  public async execute(user_id: string): Promise<Omit<User, 'password_hash'>> {
+  public async execute(user_id: string): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('User not found');
     }
 
-    return {
-      id: user.id,
-      name: user.name,
-      nick_name: user.nick_name,
-      email: user.email,
-      created_at: user.created_at,
-      updated_at: user.updated_at,
-    };
+    return user;
   }
 }
 

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateUsersService from '@modules/users/services/CreateUserService';
 
@@ -23,6 +24,8 @@ export default class UserController {
       password,
     });
 
-    return response.json(user);
+    const data = classToClass(user);
+
+    return response.json(data);
   }
 }

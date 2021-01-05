@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
 import CreateUsersService from '@modules/users/services/CreateUserService';
+import { EnumStatusCode } from '@shared/errors/AppError';
 
 interface IPostBodyDTO {
   name: string;
@@ -26,6 +27,6 @@ export default class UserController {
 
     const data = classToClass(user);
 
-    return response.json(data);
+    return response.status(EnumStatusCode.Created).json(data);
   }
 }

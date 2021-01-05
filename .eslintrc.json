@@ -21,6 +21,7 @@
   ],
   "rules": {
     "no-useless-constructor": "off",
+    "no-plusplus": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {

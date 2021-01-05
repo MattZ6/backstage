@@ -19,8 +19,6 @@ interface IRequest {
   password: string;
 }
 
-type IResponse = Omit<User, 'password_hash'>;
-
 @injectable()
 class CreateUserService {
   constructor(
@@ -36,23 +34,21 @@ class CreateUserService {
     nick_name,
     email,
     password,
-  }: IRequest): Promise<IResponse> {
-    const alreadyExistsWithThisEmail = await this.usersRepository.findByEmail(
-      email
-    );
+  }: IRequest): Promise<User> {
+    const userWithThisEmail = await this.usersRepository.findByEmail(email);
 
-    if (alreadyExistsWithThisEmail) {
+    if (userWithThisEmail) {
       throw new AppError(
         'Email address already been taken',
         EnumStatusCode.Conflict
       );
     }
 
-    const alreadyExistsWithThisNickName = await this.usersRepository.findByNickName(
+    const userWithThisNickName = await this.usersRepository.findByNickName(
       nick_name
     );
 
-    if (alreadyExistsWithThisNickName) {
+    if (userWithThisNickName) {
       throw new AppError(
         'Nick name already been taken',
         EnumStatusCode.Conflict
@@ -68,14 +64,7 @@ class CreateUserService {
       password_hash: passwordHash,
     });
 
-    return {
-      id: user.id,
-      name: user.name,
-      nick_name: user.nick_name,
-      email: user.email,
-      created_at: user.created_at,
-      updated_at: user.updated_at,
-    };
+    return user;
   }
 }
 

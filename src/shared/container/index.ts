@@ -14,6 +14,11 @@ import IUserTokensRepository, {
 } from '@modules/users/repositories/IUserTokensRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
+import IIntrumentsRepository, {
+  INSTRUMENTS_REPOSITORY_INDENTIFIER,
+} from '@modules/instruments/repositories/IIntrumentsRepository';
+import InstrumentsRepository from '@modules/instruments/infra/typeorm/repositories/InstrumentsRepository';
+
 container.registerSingleton<IUsersRepository>(
   USERS_REPOSITORY_INDENTIFIER,
   UsersRepository
@@ -22,4 +27,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUserTokensRepository>(
   USER_TOKENS_REPOSITORY_INDENTIFIER,
   UserTokensRepository
+);
+
+container.registerSingleton<IIntrumentsRepository>(
+  INSTRUMENTS_REPOSITORY_INDENTIFIER,
+  InstrumentsRepository
 );

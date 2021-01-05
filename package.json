@@ -13,7 +13,9 @@
     "build": "tsc",
     "dev:server": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "jest"
+    "test": "jest",
+    "db:seed": "tsnd -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "db:config": "yarn typeorm migration:run && db:seed"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
@@ -56,6 +58,7 @@
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.4.0",
     "typeorm": "^0.2.29",
+    "typeorm-seeding": "^1.6.1",
     "uuid": "^8.3.2"
   }
 }

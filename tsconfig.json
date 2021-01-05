@@ -6,8 +6,8 @@
     "rootDir": "./src",
     "emitDecoratorMetadata": true,
     "strict": true,
-    "strictPropertyInitialization": false,
     "allowJs": true,
+    "strictPropertyInitialization": false,
     "baseUrl": "./src",
     "paths": {
       "@modules/*": [

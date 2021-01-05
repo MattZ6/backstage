@@ -4,6 +4,7 @@ import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/session.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
+import instrumentsRouter from '@modules/instruments/infra/http/routes/instruments.routes';
 
 const router = Router();
 
@@ -11,5 +12,6 @@ router.use('/v1/sessions', sessionsRouter);
 router.use('/v1/users', usersRouter);
 router.use('/v1/password', passwordRouter);
 router.use('/v1/profile', profileRouter);
+router.use('/v1/instruments', instrumentsRouter);
 
 export default router;

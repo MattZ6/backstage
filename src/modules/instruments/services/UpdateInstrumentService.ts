@@ -38,7 +38,7 @@ class UpdateInstrumentService {
 
     if (instrumentWithThisName && instrumentWithThisName.id !== instrument_id) {
       throw new AppError(
-        'There is already an instrument registered with this name',
+        'There is already a instrument registered with this name',
         EnumStatusCode.Conflict
       );
     }

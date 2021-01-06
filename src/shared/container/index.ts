@@ -19,6 +19,11 @@ import IIntrumentsRepository, {
 } from '@modules/instruments/repositories/IIntrumentsRepository';
 import InstrumentsRepository from '@modules/instruments/infra/typeorm/repositories/InstrumentsRepository';
 
+import IMusicStylesRepository, {
+  MUSIC_STYLES_REPOSITORY_INDENTIFIER,
+} from '@modules/music_styles/repositories/IMusicStylesRepository';
+import MusicStyleRepositories from '@modules/music_styles/infra/typeorm/repositories/MusicStylesRepository';
+
 container.registerSingleton<IUsersRepository>(
   USERS_REPOSITORY_INDENTIFIER,
   UsersRepository
@@ -32,4 +37,9 @@ container.registerSingleton<IUserTokensRepository>(
 container.registerSingleton<IIntrumentsRepository>(
   INSTRUMENTS_REPOSITORY_INDENTIFIER,
   InstrumentsRepository
+);
+
+container.registerSingleton<IMusicStylesRepository>(
+  MUSIC_STYLES_REPOSITORY_INDENTIFIER,
+  MusicStyleRepositories
 );

@@ -12,6 +12,7 @@ class CreateInstrumentsSeeder implements Seeder {
     const count = await query.getCount();
 
     if (count) {
+      // eslint-disable-next-line no-console
       console.log(`
         -----------------------------------
         --- Instrumentos já cadastrados ---

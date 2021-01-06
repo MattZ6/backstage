@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 import Instrument from '@modules/instruments/infra/typeorm/entities/Instrument';
 
 import ICreateInstrumentDTO from '@modules/instruments/dtos/ICreateInstrumentDTO';
-import IListInstrumentsDTO from '@modules/instruments/dtos/IListInstrumentsDTO';
+import IListInstrumentsDTO from '@modules/instruments/dtos/IFindInstrumentsDTO';
 import IIntrumentsRepository from '@modules/instruments/repositories/IIntrumentsRepository';
 
 class FakeInstrumentsRepository implements IIntrumentsRepository {

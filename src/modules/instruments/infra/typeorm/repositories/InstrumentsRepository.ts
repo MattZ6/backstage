@@ -3,7 +3,7 @@ import { getRepository, Repository } from 'typeorm';
 import Instrument from '@modules/instruments/infra/typeorm/entities/Instrument';
 
 import ICreateInstrumentDTO from '@modules/instruments/dtos/ICreateInstrumentDTO';
-import IListInstrumentsDTO from '@modules/instruments/dtos/IListInstrumentsDTO';
+import IListInstrumentsDTO from '@modules/instruments/dtos/IFindInstrumentsDTO';
 import IInstrumentsRepository from '@modules/instruments/repositories/IIntrumentsRepository';
 
 class InstrumentsRepository implements IInstrumentsRepository {
@@ -43,8 +43,8 @@ class InstrumentsRepository implements IInstrumentsRepository {
   }
 
   public async find({
-    field = 'name',
-    order = 'ASC',
+    field,
+    order,
   }: IListInstrumentsDTO): Promise<Instrument[]> {
     return this.repository.find({
       order: {

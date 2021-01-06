@@ -27,7 +27,7 @@ class CreateInstrumentService {
 
     if (instrumentWithThisName) {
       throw new AppError(
-        'There is already an instrument registered with this name',
+        'There is already a instrument registered with this name',
         EnumStatusCode.Conflict
       );
     }

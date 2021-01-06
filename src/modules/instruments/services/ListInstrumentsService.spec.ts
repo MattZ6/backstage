@@ -36,7 +36,7 @@ describe('ListInstruments', () => {
     expect(instrumentsSearched).toEqual(expect.arrayContaining(instruments));
   });
 
-  it('should be able to list instruments ordered by name ASC', async () => {
+  it('should be able to list instruments ordered by name ASC as default', async () => {
     const length = 13;
     const requests: Promise<Instrument>[] = [];
 
@@ -51,10 +51,7 @@ describe('ListInstruments', () => {
 
     const instruments = await Promise.all(requests);
 
-    const instrumentsSearched = await listInstruments.execute({
-      field: 'name',
-      order: 'ASC',
-    });
+    const instrumentsSearched = await listInstruments.execute({});
 
     expect(instruments.sort((a, b) => (a.name < b.name ? 1 : -1))).toEqual(
       instrumentsSearched

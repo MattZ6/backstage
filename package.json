@@ -15,7 +15,7 @@
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest",
     "db:seed": "tsnd -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed",
-    "db:config": "yarn typeorm migration:run && db:seed"
+    "db:config": "yarn typeorm migration:run && yarn db:seed"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",

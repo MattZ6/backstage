@@ -1,7 +1,7 @@
 import Instrument from '@modules/instruments/infra/typeorm/entities/Instrument';
 
 import ICreateInstrumentDTO from '@modules/instruments/dtos/ICreateInstrumentDTO';
-import IListInstrumentsDTO from '@modules/instruments/dtos/IListInstrumentsDTO';
+import IListInstrumentsDTO from '@modules/instruments/dtos/IFindInstrumentsDTO';
 
 export const INSTRUMENTS_REPOSITORY_INDENTIFIER = 'InstrumentsRepository';
 

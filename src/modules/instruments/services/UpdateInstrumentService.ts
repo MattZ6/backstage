@@ -1,12 +1,17 @@
 import { inject, injectable } from 'tsyringe';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import Instrument from '@modules/instruments/infra/typeorm/entities/Instrument';
 
 import IIntrumentsRepository, {
   INSTRUMENTS_REPOSITORY_INDENTIFIER,
 } from '@modules/instruments/repositories/IIntrumentsRepository';
+
+import ICacheProvider, {
+  CACHE_PROVIDER_INDENTIFIER,
+} from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
   instrument_id: string;
@@ -18,7 +23,10 @@ interface IRequest {
 class UpdateInstrumentService {
   constructor(
     @inject(INSTRUMENTS_REPOSITORY_INDENTIFIER)
-    private instrumentsRepository: IIntrumentsRepository
+    private instrumentsRepository: IIntrumentsRepository,
+
+    @inject(CACHE_PROVIDER_INDENTIFIER)
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
@@ -46,7 +54,13 @@ class UpdateInstrumentService {
     instrument.name = name;
     instrument.label = label;
 
-    return this.instrumentsRepository.update(instrument);
+    const updatedInstrument = await this.instrumentsRepository.update(
+      instrument
+    );
+
+    await this.cacheProvider.invalidatePrefix('instruments');
+
+    return updatedInstrument;
   }
 }
 

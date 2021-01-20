@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import path from 'path';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import UsersRepository, {
   USERS_REPOSITORY_INDENTIFIER,

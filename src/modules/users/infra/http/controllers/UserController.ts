@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
+
 import CreateUsersService from '@modules/users/services/CreateUserService';
-import { EnumStatusCode } from '@shared/errors/AppError';
 
 interface IPostBodyDTO {
   name: string;

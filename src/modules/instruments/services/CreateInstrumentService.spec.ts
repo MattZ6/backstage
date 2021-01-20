@@ -3,16 +3,22 @@ import faker from 'faker';
 import AppError from '@shared/errors/AppError';
 
 import FakeInstrumentsRepository from '@modules/instruments/repositories/fakes/FakeInstrumentsRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import CreateInstrumentService from '@modules/instruments/services/CreateInstrumentService';
 
 let fakeInstrumentsRepository: FakeInstrumentsRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let createInstrument: CreateInstrumentService;
 
 describe('CreateInstrument', () => {
   beforeEach(() => {
     fakeInstrumentsRepository = new FakeInstrumentsRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    createInstrument = new CreateInstrumentService(fakeInstrumentsRepository);
+    createInstrument = new CreateInstrumentService(
+      fakeInstrumentsRepository,
+      fakeCacheProvider
+    );
   });
 
   it('should be able to create a new instrument', async () => {

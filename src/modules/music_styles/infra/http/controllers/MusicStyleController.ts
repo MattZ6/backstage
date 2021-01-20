@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { EnumStatusCode } from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import ListMusicStylesService from '@modules/music_styles/services/ListMusicStylesService';
 import CreateMusicStyleService from '@modules/music_styles/services/CreateMusicStyleService';

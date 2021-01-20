@@ -39,7 +39,7 @@ class EtherealMailProvider implements IMailProvider {
     subject,
     templateData,
   }: ISendMailDTO): Promise<void> {
-    const text = await this.mailTemplateProvider.parse(templateData);
+    const html = await this.mailTemplateProvider.parse(templateData);
 
     const message = await this.client.sendMail({
       from: {
@@ -51,10 +51,12 @@ class EtherealMailProvider implements IMailProvider {
         address: to.email,
       },
       subject,
-      text,
+      html,
     });
 
+    // eslint-disable-next-line no-console
     console.log(message.messageId);
+    // eslint-disable-next-line no-console
     console.log(nodemailer.getTestMessageUrl(message));
   }
 }

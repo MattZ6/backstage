@@ -5,7 +5,9 @@ import cors from 'cors';
 import { errors } from 'celebrate';
 import 'express-async-errors';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
+
 import routes from '@shared/infra/http/routes';
 
 import '@shared/infra/typeorm';

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { EnumStatusCode } from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import SendForgotPasswordEmailService from '@modules/users/services/SendForgotPasswordEmailService';
 

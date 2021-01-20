@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 

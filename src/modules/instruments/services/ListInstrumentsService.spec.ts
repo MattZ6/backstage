@@ -3,16 +3,22 @@ import faker from 'faker';
 import Instrument from '@modules/instruments/infra/typeorm/entities/Instrument';
 
 import FakeInstrumentsRepository from '@modules/instruments/repositories/fakes/FakeInstrumentsRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import ListInstrumentsService from '@modules/instruments/services/ListInstrumentsService';
 
 let fakeInstrumentsRepository: FakeInstrumentsRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let listInstruments: ListInstrumentsService;
 
 describe('ListInstruments', () => {
   beforeEach(() => {
     fakeInstrumentsRepository = new FakeInstrumentsRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    listInstruments = new ListInstrumentsService(fakeInstrumentsRepository);
+    listInstruments = new ListInstrumentsService(
+      fakeInstrumentsRepository,
+      fakeCacheProvider
+    );
   });
 
   it('should be able to list instruments', async () => {

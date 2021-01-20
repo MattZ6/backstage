@@ -3,16 +3,22 @@ import faker from 'faker';
 import MusicStyle from '@modules/music_styles/infra/typeorm/entities/MusicStyle';
 
 import FakeMusicStylesRepository from '@modules/music_styles/repositories/fakes/FakeMusicStylesRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import ListMusicStylesService from '@modules/music_styles/services/ListMusicStylesService';
 
 let fakeMusicStylesRepository: FakeMusicStylesRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let listMusicStyles: ListMusicStylesService;
 
 describe('ListMusicStyles', () => {
   beforeEach(() => {
     fakeMusicStylesRepository = new FakeMusicStylesRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    listMusicStyles = new ListMusicStylesService(fakeMusicStylesRepository);
+    listMusicStyles = new ListMusicStylesService(
+      fakeMusicStylesRepository,
+      fakeCacheProvider
+    );
   });
 
   it('should be able to list music styles', async () => {

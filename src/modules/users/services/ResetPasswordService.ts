@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import { isAfter, addSeconds } from 'date-fns';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import IUsersRepository, {
   USERS_REPOSITORY_INDENTIFIER,

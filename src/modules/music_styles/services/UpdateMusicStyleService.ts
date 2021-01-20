@@ -1,12 +1,17 @@
 import { inject, injectable } from 'tsyringe';
 
-import AppError, { EnumStatusCode } from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
+import EnumStatusCode from '@shared/dtos/EnumStatusCode';
 
 import MusicStyle from '@modules/music_styles/infra/typeorm/entities/MusicStyle';
 
 import IMusicStylesRepository, {
   MUSIC_STYLES_REPOSITORY_INDENTIFIER,
 } from '@modules/music_styles/repositories/IMusicStylesRepository';
+
+import ICacheProvider, {
+  CACHE_PROVIDER_INDENTIFIER,
+} from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
   music_style_id: string;
@@ -17,18 +22,21 @@ interface IRequest {
 class UpdateMusicStyleService {
   constructor(
     @inject(MUSIC_STYLES_REPOSITORY_INDENTIFIER)
-    private musicStylesRepository: IMusicStylesRepository
+    private musicStylesRepository: IMusicStylesRepository,
+
+    @inject(CACHE_PROVIDER_INDENTIFIER)
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
     music_style_id,
     name,
   }: IRequest): Promise<MusicStyle> {
-    const instrument = await this.musicStylesRepository.findById(
+    const musicStyle = await this.musicStylesRepository.findById(
       music_style_id
     );
 
-    if (!instrument) {
+    if (!musicStyle) {
       throw new AppError('Music style not found', EnumStatusCode.NotFound);
     }
 
@@ -46,9 +54,15 @@ class UpdateMusicStyleService {
       );
     }
 
-    instrument.name = name;
+    musicStyle.name = name;
 
-    return this.musicStylesRepository.update(instrument);
+    const updatedMusicStyle = await this.musicStylesRepository.update(
+      musicStyle
+    );
+
+    await this.cacheProvider.invalidatePrefix('music-styles');
+
+    return updatedMusicStyle;
   }
 }
 

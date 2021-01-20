@@ -3,16 +3,22 @@ import faker from 'faker';
 import AppError from '@shared/errors/AppError';
 
 import FakeMusicStylesRepository from '@modules/music_styles/repositories/fakes/FakeMusicStylesRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import UpdateMusicStyleService from '@modules/music_styles/services/UpdateMusicStyleService';
 
 let fakeMusicStylesRepository: FakeMusicStylesRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let updateMusicStyle: UpdateMusicStyleService;
 
 describe('UpdateMusicStyle', () => {
   beforeEach(() => {
     fakeMusicStylesRepository = new FakeMusicStylesRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
-    updateMusicStyle = new UpdateMusicStyleService(fakeMusicStylesRepository);
+    updateMusicStyle = new UpdateMusicStyleService(
+      fakeMusicStylesRepository,
+      fakeCacheProvider
+    );
   });
 
   it('should be able to update the data of an existing music style', async () => {

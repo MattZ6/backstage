@@ -57,11 +57,11 @@
     "ioredis": "4.28.3",
     "jsonwebtoken": "8.5.1",
     "nodemailer": "6.7.2",
-    "pg": "8.5.1",
+    "pg": "8.7.1",
     "rate-limiter-flexible": "2.3.6",
     "redis": "4.0.2",
     "reflect-metadata": "0.1.13",
-    "tsyringe": "4.4.0",
+    "tsyringe": "4.6.0",
     "typeorm": "0.2.41",
     "typeorm-seeding": "1.6.1",
     "uuid": "8.3.2"

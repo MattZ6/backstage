@@ -62,7 +62,7 @@
     "redis": "4.0.3",
     "reflect-metadata": "0.1.13",
     "tsyringe": "4.6.0",
-    "typeorm": "0.2.41",
+    "typeorm": "0.2.43",
     "typeorm-seeding": "1.6.1",
     "uuid": "8.3.2"
   }

@@ -59,7 +59,7 @@
     "nodemailer": "6.9.0",
     "pg": "8.8.0",
     "rate-limiter-flexible": "2.4.1",
-    "redis": "4.5.1",
+    "redis": "4.6.1",
     "reflect-metadata": "0.1.13",
     "tsyringe": "4.7.0",
     "typeorm": "0.3.11",

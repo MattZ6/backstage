@@ -45,7 +45,13 @@
     ],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["__tests__/**/*.ts", "vitest.config.ts", "tsup.config.ts"] }
+      {
+        "devDependencies": [
+          "__tests__/**/*.ts",
+          "vitest.config.ts",
+          "tsup.config.ts"
+        ]
+      }
     ]
   }
 }

@@ -1,14 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { conflict } from '@presentation/helpers';
+import { conflict } from '@presentation/helpers'
 
-import { makeApplicationErrorMock } from '../../../../../domain/errors/mocks';
+import { makeApplicationErrorMock } from '../../../../../domain/errors/mocks'
 
 describe('conflict', () => {
   it('should return a response object with status code 409', () => {
-    const { output: applicationErrorMock } = makeApplicationErrorMock();
+    const { output: applicationErrorMock } = makeApplicationErrorMock()
 
-    const output = conflict(applicationErrorMock);
+    const output = conflict(applicationErrorMock)
 
     expect(output).toEqual({
       statusCode: 409,
@@ -16,6 +16,6 @@ describe('conflict', () => {
         code: applicationErrorMock.code,
         message: applicationErrorMock.message,
       },
-    });
-  });
-});
+    })
+  })
+})

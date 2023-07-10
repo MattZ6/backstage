@@ -1,10 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
-import { internalServerError } from '@presentation/helpers';
+import { internalServerError } from '@presentation/helpers'
 
 describe('internalServerError', () => {
   it('should return a response object with status code 500', () => {
-    const output = internalServerError();
+    const output = internalServerError()
 
     expect(output).toEqual({
       statusCode: 500,
@@ -12,6 +12,6 @@ describe('internalServerError', () => {
         code: 'internal',
         message: 'Internal server error',
       },
-    });
-  });
-});
+    })
+  })
+})

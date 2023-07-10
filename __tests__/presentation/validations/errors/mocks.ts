@@ -1,22 +1,22 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
 
-import { ValidationError } from '@presentation/validations/errors';
+import { ValidationError } from '@presentation/validations/errors'
 
 type Input = {
-  withoutValue?: boolean;
-};
+  withoutValue?: boolean
+}
 
 export function makeValidationErrorMock({ withoutValue = false }: Input = {}) {
-  const field = faker.database.column();
-  const type = faker.database.type();
-  const message = faker.lorem.sentence();
-  let value = faker.lorem.word();
+  const field = faker.database.column()
+  const type = faker.database.type()
+  const message = faker.lorem.sentence()
+  let value = faker.lorem.word()
 
   if (withoutValue) {
-    value = undefined;
+    value = undefined
   }
 
-  const output = new ValidationError(field, type, message, value);
+  const output = new ValidationError(field, type, message, value)
 
   return {
     field,
@@ -24,5 +24,5 @@ export function makeValidationErrorMock({ withoutValue = false }: Input = {}) {
     message,
     value,
     output,
-  };
+  }
 }

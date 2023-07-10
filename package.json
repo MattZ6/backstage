@@ -25,7 +25,6 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js)\"",
     "lint:fix": "pnpm lint --fix",
-    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js)\" --write",
     "test": "vitest run --passWithNoTests",
     "test:cov": "vitest run --passWithNoTests --coverage",
     "docker:dev": "cross-env DATABASE_PORT=5432 && pnpm run dev",
@@ -59,6 +58,7 @@
     "tsconfig-paths": "4.2.0",
     "tsup": "7.1.0",
     "typescript": "5.1.6",
+    "vite-tsconfig-paths": "4.2.0",
     "vitest": "0.33.0"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
     "cross-env": "7.0.3",
     "dotenv": "16.3.1",
     "express": "4.18.2",
+    "fastify": "4.19.2",
     "helmet": "7.0.0",
     "swagger-ui-express": "5.0.0"
   }

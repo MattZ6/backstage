@@ -4,7 +4,6 @@
   "stabilityDays": 3,
   "prCreation": "not-pending",
   "labels": ["📦 dependencies"],
-  "assignees": ["mattz6"],
   "packageRules": [
     {
       "packageNames": ["node"],

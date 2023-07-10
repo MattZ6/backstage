@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Error {
+  id                      String   @id @default(uuid())
+  exception_was_thrown_in String
+  resource_url            String
+  http_method             String
+  stack                   String
+  created_at              DateTime @default(now())
+
+  @@map("errors")
+}

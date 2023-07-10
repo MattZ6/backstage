@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v0.0.0",
+    "title": "The title goes here",
+    "description": "The description goes here (e.g. API docs for xxx application)",
+    "license": {
+      "name": "license-name",
+      "url": "link-to-license-docs"
+    },
+    "contact": {
+      "name": "Your name"
+    }
+  },
+  "externalDocs": {
+    "url": "external-links-goes-here",
+    "description": "More info"
+  },
+  "paths": {}
+}

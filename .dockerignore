@@ -1,0 +1,13 @@
+**/.github
+**/.vscode
+**/coverage
+**/.swc
+**/dist
+**/node_modules
+**/.git
+**/.editorconfig
+**/.env
+**/.env.example
+**/LICENSE.md
+**/README.md
+**/*.log

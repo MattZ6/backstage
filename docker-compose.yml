@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+
+  # Database
+  app_database:
+    image: postgres:15.2-alpine
+    container_name: app_database
+    restart: always
+    ports:
+      - ${DATABASE_PORT}:5432
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - net
+
+  # Application
+  app_api:
+    build: .
+    container_name: app_api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/node/app
+    depends_on:
+      - app_database
+    links:
+      - app_database
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

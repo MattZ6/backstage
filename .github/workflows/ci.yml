@@ -1,56 +1,162 @@
-name: Check PR
+name: CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
+    branches:
+    - '**'
 
 jobs:
-  run:
-    name: Run type check, linters and tests
+  commitlint:
+    name: Lint commit messages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏗️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 📄 Check commits messages
+        uses: wagoid/commitlint-github-action@v5
+
+  types:
+    name: Check types
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [18.12.0]
+        node-version: [18.12.1]
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: 🏗️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v2.2.4
-      id: pnpm-install
-      with:
-        version: 7
-        run_install: false
+      - name: 🏗️ Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
 
-    - name: Get pnpm store directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: 🏗️ Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-    - name: Setup pnpm cache
-      uses: actions/cache@v3
-      with:
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+      - name: 🏗️ Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: 📦 Install dependencies
+        run: pnpm i --frozen-lockfile
 
-    - name: Check types
-      run: pnpm type-check
+      - name: 🛠️ Check types
+        run: yarn type-check
 
-    - name: Check linting
-      run: pnpm lint
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
 
-    - name: Run tests
-      run: pnpm test
+    strategy:
+      matrix:
+        node-version: [18.12.1]
+
+    steps:
+      - name: 🏗️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 🏗️ Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🏗️ Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 🏗️ Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: 📦 Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: 🛠️ Lint
+        run: pnpm lint
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.12.1]
+
+    steps:
+      - name: 🏗️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: 🏗️ Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🏗️ Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 🏗️ Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: 📦 Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: 🧪 Run tests
+        run: pnpm test:ci

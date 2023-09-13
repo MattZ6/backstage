@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 
 import { HttpResponseHelper } from '@presentation/helpers/http/responses/errorDTO'
 

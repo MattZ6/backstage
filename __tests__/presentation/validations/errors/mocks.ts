@@ -10,7 +10,7 @@ export function makeValidationErrorMock({ withoutValue = false }: Input = {}) {
   const field = faker.database.column()
   const type = faker.database.type()
   const message = faker.lorem.sentence()
-  let value = faker.lorem.word()
+  let value: string | undefined = faker.lorem.word()
 
   if (withoutValue) {
     value = undefined

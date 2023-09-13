@@ -12,3 +12,6 @@ tmp
 # Tests
 coverage
 .swc
+
+# Typescript cache
+*.tsbuildinfo

@@ -23,7 +23,7 @@ export function makeApplicationErrorMock({
   withoutCode = false,
 }: MakeApplicationErrorMockInput = {}) {
   const message = faker.lorem.sentence()
-  let code = faker.database.type()
+  let code: string | undefined = faker.database.type()
 
   if (withoutCode) {
     code = undefined

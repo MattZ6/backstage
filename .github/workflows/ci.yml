@@ -29,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.12.1]
+        bun-version: [1.0.1]
 
     steps:
       - name: 🏗️ Checkout repo
@@ -37,37 +37,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: 🏗️ Use Bun.js ${{ matrix.bun-version }}
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: 🏗️ Install pnpm
-        uses: pnpm/action-setup@v2.2.4
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: 🏗️ Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 🏗️ Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          bun-version: ${{ matrix.bun-version }}
 
       - name: 📦 Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: bun i --frozen-lockfile
+
+      - name: 🛠️ Run prisma generate
+        run: bun prisma generate
 
       - name: 🛠️ Check types
-        run: yarn type-check
+        run: bun type-check
 
   lint:
     name: Lint
@@ -75,7 +57,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.12.1]
+        bun-version: [1.0.1]
 
     steps:
       - name: 🏗️ Checkout repo
@@ -83,37 +65,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: 🏗️ Use Bun ${{ matrix.bun-version }}
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: 🏗️ Install pnpm
-        uses: pnpm/action-setup@v2.2.4
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: 🏗️ Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 🏗️ Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          bun-version: ${{ matrix.bun-version }}
 
       - name: 📦 Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: bun i --frozen-lockfile
 
       - name: 🛠️ Lint
-        run: pnpm lint
+        run: bun lint
 
   tests:
     name: Tests
@@ -121,7 +82,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.12.1]
+        bun-version: [1.0.1]
 
     steps:
       - name: 🏗️ Checkout repo
@@ -129,34 +90,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🏗️ Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: 🏗️ Use Bun.js ${{ matrix.bun-version }}
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: 🏗️ Install pnpm
-        uses: pnpm/action-setup@v2.2.4
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: 🏗️ Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 🏗️ Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          bun-version: ${{ matrix.bun-version }}
 
       - name: 📦 Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: bun i --frozen-lockfile
 
       - name: 🧪 Run tests
-        run: pnpm test:ci
+        run: bun test:cov

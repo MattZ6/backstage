@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 
 import { PresentationError } from '@presentation/errors'
 
@@ -9,7 +9,7 @@ describe('PresentationError', () => {
 
     const output = new PresentationError(message, code)
 
-    expect(output).instanceOf(PresentationError)
+    expect(output).toBeInstanceOf(PresentationError)
     expect(output.name).toBe('PresentationError')
     expect(output.message).toBe(message)
     expect(output.code).toBe(code)

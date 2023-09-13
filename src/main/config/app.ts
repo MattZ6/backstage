@@ -1,13 +1,14 @@
-import express from 'express'
+import { Elysia } from 'elysia'
 
+import { CustomElysiaInstance } from '@main/adapters/elysia/types'
 import { setupHealthCheckEndpoint } from '@main/config/healthCheck'
 import { setupMiddlewares } from '@main/config/middlewares'
 import { setupRoutes } from '@main/routes'
 
-const app = express()
+const app = new Elysia<string, CustomElysiaInstance>({ name: 'Backstage' })
 
-setupMiddlewares(app)
 setupHealthCheckEndpoint(app)
+setupMiddlewares(app)
 setupRoutes(app)
 
 export { app }

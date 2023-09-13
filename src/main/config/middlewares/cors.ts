@@ -1,7 +1,8 @@
-import cors from 'cors'
-import type { Express } from 'express'
+import { cors } from '@elysiajs/cors'
 
-export function setupCors(app: Express) {
+import type { ElysiaApp } from '@main/adapters/elysia/types'
+
+export function setupCors(app: ElysiaApp) {
   /**
    * Its important to add the origin param to cors configuration.
    */

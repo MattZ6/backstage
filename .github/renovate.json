@@ -3,11 +3,5 @@
   "semanticCommits": true,
   "stabilityDays": 3,
   "prCreation": "not-pending",
-  "labels": ["📦 dependencies"],
-  "packageRules": [
-    {
-      "packageNames": ["node"],
-      "enabled": false
-    }
-  ]
+  "labels": ["📦 dependencies"]
 }

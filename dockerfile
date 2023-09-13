@@ -1,18 +1,20 @@
-FROM node:18.12.0-alpine
+FROM oven/bun:1.0.1
 
-# Set non-root user and expose port
-USER node
+WORKDIR /app
+
+COPY package.json package.json
+COPY bun.lockb bun.lockb
+
+RUN bun i
+
+COPY . .
+
+ENV NODE_ENV production
+
 EXPOSE ${PORT}
 
-WORKDIR /home/node/app
+RUN apt-get update -y && apt-get install -y openssl
 
-COPY --chown=node:node package.json pnpm.lock ./
+RUN bun prisma generate
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile
-
-COPY --chown=node:node . .
-
-RUN pnpm prisma generate
-
-CMD [ "pnpm", "docker:dev" ]
+CMD ["bun", "docker:dev"]

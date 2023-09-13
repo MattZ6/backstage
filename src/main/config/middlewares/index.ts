@@ -1,13 +1,11 @@
-import type { Express } from 'express'
+import { ElysiaApp } from '@main/adapters/elysia/types'
 
-import { setupBodyParser } from './bodyParser'
 import { setupCors } from './cors'
+import { setupDocs } from './docs'
 import { setupHelmet } from './helmet'
-import { setupSwagger } from './swagger'
 
-export function setupMiddlewares(app: Express) {
+export function setupMiddlewares(app: ElysiaApp) {
   setupHelmet(app)
-  setupBodyParser(app)
   setupCors(app)
-  setupSwagger(app)
+  setupDocs(app)
 }

@@ -17,58 +17,38 @@
     "url": "https://github.com/MattZ6"
   },
   "scripts": {
-    "prestart": "pnpm run db:migrate",
-    "postinstall": "pnpm exec prisma generate",
-    "build": "tsup",
-    "start": "cross-env NODE_ENV=production node dist/main/server.js",
-    "dev": "tsnd -r tsconfig-paths/register --inspect --exit-child --transpile-only --ignore-watch node_modules --respawn src/main/server.ts",
+    "start": "NODE_ENV=production bun ./src/main/server.ts",
+    "dev": "bun --watch ./src/main/server.ts",
     "type-check": "tsc --noEmit",
-    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js)\"",
-    "lint:fix": "pnpm lint --fix",
-    "test": "vitest run --passWithNoTests",
-    "test:cov": "vitest run --passWithNoTests --coverage",
-    "docker:dev": "cross-env DATABASE_PORT=5432 && pnpm run dev",
+    "lint": "eslint --ignore-path .gitignore 'src/**/*.+(ts|js)'",
+    "lint:fix": "bun lint --fix",
+    "test": "bun test",
+    "test:cov": "bun test --coverage",
+    "docker:dev": "DATABASE_PORT=5432 bun dev",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
-    "prisma:dev": "cross-env DATABASE_HOST=localhost prisma",
-    "db:migrate": "pnpm run prisma migrate deploy",
-    "db:config": "pnpm run db:migrate"
-  },
-  "engines": {
-    "node": ">=18",
-    "pnpm": ">=7"
+    "prisma:dev": "DATABASE_HOST=localhost prisma",
+    "db:migrate": "bun prisma migrate deploy",
+    "db:config": "bun db:migrate"
   },
   "prisma": {
     "schema": "src/infra/database/prisma/schema.prisma"
   },
   "devDependencies": {
     "@faker-js/faker": "8.0.2",
-    "@rocketseat/eslint-config": "1.3.0",
-    "@types/cors": "2.8.13",
-    "@types/express": "4.17.17",
-    "@types/node": "20.4.1",
-    "@types/swagger-ui-express": "4.1.3",
-    "@vitest/coverage-c8": "0.33.0",
-    "@vitest/coverage-v8": "0.33.0",
-    "eslint": "8.44.0",
+    "@rocketseat/eslint-config": "2.1.0",
+    "bun-types": "1.0.1",
+    "eslint": "8.49.0",
     "eslint-plugin-import-helpers": "1.3.1",
     "git-commit-msg-linter": "5.0.4",
-    "prisma": "4.16.2",
-    "ts-node-dev": "2.0.0",
-    "tsconfig-paths": "4.2.0",
-    "tsup": "7.1.0",
-    "typescript": "5.1.6",
-    "vite-tsconfig-paths": "4.2.0",
-    "vitest": "0.33.0"
+    "prisma": "5.3.0",
+    "typescript": "5.2.2"
   },
   "dependencies": {
-    "@prisma/client": "4.16.2",
-    "cors": "2.8.5",
+    "@elysiajs/cors": "0.6.0",
+    "@prisma/client": "5.3.0",
     "cross-env": "7.0.3",
-    "dotenv": "16.3.1",
-    "express": "4.18.2",
-    "fastify": "4.19.2",
-    "helmet": "7.0.0",
-    "swagger-ui-express": "5.0.0"
+    "elysia": "0.6.23",
+    "elysia-helmet": "1.0.1"
   }
 }

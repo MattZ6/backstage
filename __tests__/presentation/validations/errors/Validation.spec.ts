@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 
 import { ValidationError } from '@presentation/validations/errors'
 
@@ -8,7 +8,7 @@ describe('ValidationError', () => {
   it('should instantiate a ValidationError with correct values', () => {
     const { field, type, message, value, output } = makeValidationErrorMock()
 
-    expect(output).instanceOf(ValidationError)
+    expect(output).toBeInstanceOf(ValidationError)
     expect(output.name).toBe('ValidationError')
     expect(output.code).toBe('validation')
     expect(output.field).toBe(field)
@@ -23,7 +23,7 @@ describe('ValidationError', () => {
       withoutValue: true,
     })
 
-    expect(output).instanceOf(ValidationError)
+    expect(output).toBeInstanceOf(ValidationError)
     expect(output.name).toBe('ValidationError')
     expect(output.code).toBe('validation')
     expect(output.field).toBe(field)

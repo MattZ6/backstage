@@ -17,9 +17,15 @@ export class MiddlewareErrorHandlerDecorator implements IMiddleware {
 
       return response
     } catch (error) {
+      let stack = 'NO STACK PROVIDED'
+
+      if (error instanceof Error) {
+        stack = error.stack ?? 'NO STACK PROVIDED'
+      }
+
       this.createErrorRepository
         .create({
-          stack: error?.stack ?? 'NO STACK PROVIDED',
+          stack,
           exception_was_thrown_in: this.middleware.constructor.name,
           resource_url: request.originalUrl,
           http_method: request.method,

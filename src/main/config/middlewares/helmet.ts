@@ -1,6 +1,7 @@
-import type { Express } from 'express'
-import helmet from 'helmet'
+import { helmet } from 'elysia-helmet'
 
-export function setupHelmet(app: Express) {
+import type { ElysiaApp } from '@main/adapters/elysia/types'
+
+export function setupHelmet(app: ElysiaApp) {
   app.use(helmet())
 }

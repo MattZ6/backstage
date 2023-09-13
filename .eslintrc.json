@@ -48,7 +48,6 @@
       {
         "devDependencies": [
           "__tests__/**/*.ts",
-          "vitest.config.ts",
           "tsup.config.ts"
         ]
       }

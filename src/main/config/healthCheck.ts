@@ -1,11 +1,8 @@
-import type { Express } from 'express'
+import type { ElysiaApp } from '@main/adapters/elysia/types'
 
-export function setupHealthCheckEndpoint(app: Express) {
-  app.get('/health', (_, res) =>
-    res.json({
-      uptime: process.uptime(),
-      message: 'Ok',
-      date: new Date(),
-    }),
-  )
+export function setupHealthCheckEndpoint(app: ElysiaApp) {
+  app.get('/health', () => ({
+    uptime: process.uptime(),
+    date: new Date(),
+  }))
 }

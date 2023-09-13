@@ -3,9 +3,9 @@ version: "3.9"
 services:
 
   # Database
-  app_database:
+  backstage_database:
     image: postgres:15.2-alpine
-    container_name: app_database
+    container_name: backstage_database
     restart: always
     ports:
       - ${DATABASE_PORT}:5432
@@ -19,20 +19,20 @@ services:
       - net
 
   # Application
-  app_api:
+  backstage_api:
     build: .
-    container_name: app_api
+    container_name: backstage_api
     restart: always
     env_file:
       - .env
     ports:
       - ${PORT}:${PORT}
     volumes:
-      - .:/node/app
+      - .:/app
     depends_on:
-      - app_database
+      - backstage_database
     links:
-      - app_database
+      - backstage_database
     networks:
       - net
 

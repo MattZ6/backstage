@@ -7,7 +7,7 @@ type ValidationErrorData = {
   field: string
   type: string
   message: string
-  value?: string | number
+  value?: string | number | null
 }
 
 type ValidationErrorDTO = HttpResponseHelper.ErrorDTO & {

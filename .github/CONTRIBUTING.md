@@ -17,6 +17,6 @@ This project is MIT-licensed, and this means that you can implement and use what
 If you encounter a problem with this project, please open an issue. Be sure to include:
 
 - Package version;
-- Node and Express versions;
+- Bun and Elysia versions;
 - Brief but thorough description of the issue;
 - Link to a CodeSandbox (or similar) demonstrating the problem (optional, but highly recommended, especially for complex problems).

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 
 import { DomainError } from '@domain/errors'
 
@@ -8,7 +8,7 @@ describe('DomainError', () => {
   it('should instantiate a DomainError with correct values', () => {
     const { message, code, output } = makeDomainErrorMock()
 
-    expect(output).instanceOf(DomainError)
+    expect(output).toBeInstanceOf(DomainError)
     expect(output.name).toBe('DomainError')
     expect(output.message).toBe(message)
     expect(output.code).toBe(code)

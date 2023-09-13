@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 
 import { ApplicationError } from '@domain/errors'
 
@@ -8,7 +8,7 @@ describe('ApplicationError', () => {
   it('should instantiate a ApplicationError with correct values', () => {
     const { message, code, output } = makeApplicationErrorMock()
 
-    expect(output).instanceOf(ApplicationError)
+    expect(output).toBeInstanceOf(ApplicationError)
     expect(output.name).toBe('ApplicationError')
     expect(output.message).toBe(message)
     expect(output.code).toBe(code)
@@ -18,7 +18,7 @@ describe('ApplicationError', () => {
   it('should instantiate a ApplicationError without code', () => {
     const { message, output } = makeApplicationErrorMock({ withoutCode: true })
 
-    expect(output).instanceOf(ApplicationError)
+    expect(output).toBeInstanceOf(ApplicationError)
     expect(output.name).toBe('ApplicationError')
     expect(output.message).toBe(message)
     expect(output.code).toBe('error')

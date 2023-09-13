@@ -1,10 +1,9 @@
-import { Router } from 'express'
-import type { Express } from 'express'
+import type { ElysiaApp } from '@main/adapters/elysia/types'
 
-const routes = Router()
+import { testRoutes } from './test.route'
 
-// Here goes the routes
+export function setupRoutes(app: ElysiaApp) {
+  // Here goes the routes
 
-export function setupRoutes(app: Express) {
-  app.use(routes)
+  app.group('/v1/test', (app) => app.use(testRoutes))
 }

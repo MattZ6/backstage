@@ -1,18 +1,23 @@
 export namespace HttpProtocols {
-  export type IRequest<B = unknown, P = unknown, Q = unknown, H = unknown> = {
+  export type IRequest<
+    TBody = unknown,
+    TParams = unknown,
+    TQuery = unknown,
+    THeaders = unknown,
+  > = {
     user?: {
       id: string
     }
-    body: B
-    params: P
-    query: Q
-    headers: H
+    body: TBody
+    params: TParams
+    query: TQuery
+    headers: THeaders
     originalUrl: string
     method: string
   }
 
-  export type IResponse<B = unknown> = {
+  export type IResponse<TBody = unknown> = {
     statusCode: number
-    body?: B
+    body?: TBody | null
   }
 }

@@ -9,7 +9,7 @@ export class ValidationError extends ApplicationError {
     field: string,
     type: string,
     message: string,
-    value: string | number = null,
+    value: string | number | null = null,
   ) {
     super(message, 'validation')
 

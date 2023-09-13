@@ -14,7 +14,7 @@
 ## 💡 You will need
 
 - First, a cup of coffee ☕
-- [Node JS](https://nodejs.org) installed on your host;
+- [🫓 Bun](https://bun.sh/docs/installation) installed on your host;
 - [🐳 Docker](https://www.docker.com) installed on your host — with [Docker compose](https://docs.docker.com/compose/install).
 
 ## 🎉 Starting

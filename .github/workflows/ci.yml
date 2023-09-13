@@ -45,6 +45,9 @@ jobs:
       - name: 📦 Install dependencies
         run: bun i --frozen-lockfile
 
+      - name: 🛠️ Run prisma generate
+        run: bun prisma generate
+
       - name: 🛠️ Check types
         run: bun type-check
 
@@ -96,4 +99,4 @@ jobs:
         run: bun i --frozen-lockfile
 
       - name: 🧪 Run tests
-        run: bun test:ci
+        run: bun test:cov

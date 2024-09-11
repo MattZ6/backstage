@@ -4,7 +4,7 @@ services:
 
   # Database
   app_database:
-    image: postgres:15.2-alpine
+    image: postgres:15.8-alpine
     container_name: app_database
     restart: always
     ports:
